@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const DB_NAME = 'lab-ex-social-auth'
+const DB_NAME = 'lab-ex-social-auth-prosegur'
 const MONGODB_URI = `mongodb://localhost:27017/${DB_NAME}`;
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true })

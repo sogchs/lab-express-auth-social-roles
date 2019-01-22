@@ -12,6 +12,10 @@ module.exports.list = (req, res, next) => {
     .catch(error => next(error));
 }
 
+module.exports.home = (req, res, next) => {
+  res.render('users/home');
+}
+
 module.exports.create = (req, res, next) => {
   res.render('users/create');
 }

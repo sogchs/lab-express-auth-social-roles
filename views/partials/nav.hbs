@@ -1,5 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<a class="navbar-brand" href="#">Social Auth</a>
+<nav class="w-100 navbar navbar-expand-lg navbar-light bg-warning">
+	<div class="container d-flex align-items-end">
+		<img style="width: 140px" src="https://www.interbrand.com/assets/00000001634.png" alt="logo" href="#">
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav-content" aria-controls="main-nav-content"
 	 aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
@@ -9,7 +10,13 @@
 		<ul class="navbar-nav mr-auto">
 			{{#if session}}
 				<li class="nav-item active">
-					<a class="nav-link" href="/users">Users</a>
+					<a class="nav-link" href="/users/home">Home</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="/users/list">Users List</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="#">Settings</a>
 				</li>
 			{{else}}
 				<li class="nav-item active">
@@ -31,4 +38,6 @@
 			</li>
 		{{/if}}
 	</ul>
+	</div>
+	
 </nav>

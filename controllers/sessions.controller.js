@@ -1,24 +1,28 @@
 const passport = require('passport');
+const mongoose = require('mongoose');
+const User = require('../models/user.model');
 
 module.exports.create = (req, res, next) => {
-  res.render( 'sessions/create');
+  res.render('sessions/create');
 }
 
 module.exports.doCreate = (req, res, next) => {
-  function renderWithErrors(error) {
-    res.status(400).render('/sessions/create', {
-    users: req.body,
-    errors : errors
-  })
-}
-let { email , password } = req.body;
+
+  function renderWithErrors(errors) {
+    res.status(400).render('sessions/create', {
+      user: req.body,
+      errors: errors
+    });
+  }
+
+  let { email, password } = req.body;
+
   if (!email || !password) {
-    renderWithErrors({ 
+    renderWithErrors({
       email: email ? undefined : 'Email is required',
       password: password ? undefined : 'Password is required'
     });
-    
-  } else  {
+  } else {
     passport.authenticate('local-auth', (error, user, validation) => {
       if (error) {
         next(error);
@@ -37,26 +41,23 @@ let { email , password } = req.body;
   }
 }
 
-
 module.exports.delete = (req, res, next) => {
   req.logout();
   res.redirect('/sessions/create');
 }
 
-
-  module.exports.createWithIDPCallback = (req, res, next) => {
-    passport.authenticate(`${req.params.provider}-auth`, (error, user) => {
-      if (error) {
-        next(error);
-      } else {
-        req.login(user, (error) => {
-          if (error) {
-            next(error)
-          } else {
-            res.redirect(`/users`)
-          }
-        });
-      }
-    })(req, res, next);
-  }
-
+module.exports.createWithIDPCallback = (req, res, next) => {
+  passport.authenticate(`${req.params.provider}-auth`, (error, user) => {
+    if (error) {
+      next(error);
+    } else {
+      req.login(user, (error) => {
+        if (error) {
+          next(error)
+        } else {
+          res.redirect(`/users`)
+        }
+      });
+    }
+  })(req, res, next);
+}
